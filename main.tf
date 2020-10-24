@@ -116,8 +116,7 @@ resource "aws_eip_association" "hashicat" {
 }
 
 resource "aws_instance" "hashicat" {
-  Department = "devops"
-  Billable = true
+
   ami                         = data.aws_ami.ubuntu.id
   instance_type               = var.instance_type
   key_name                    = aws_key_pair.hashicat.key_name
@@ -126,6 +125,8 @@ resource "aws_instance" "hashicat" {
   vpc_security_group_ids      = [aws_security_group.hashicat.id]
 
   tags = {
+    Department = "devops"
+    Billable = true
     Name = "${var.prefix}-hashicat-instance"
   }
 }
